@@ -1,0 +1,141 @@
+// Grid
+
+$columns: 12;
+$column-width: 100% / $columns;
+
+// Quickie columns() function
+@function columns($num-columns, $parent-num-columns: $columns) {
+  @return $column-width * $num-columns * ($columns / $parent-num-columns);
+}
+
+// Base column classes
+.column {
+  width: columns(1);
+}
+
+.grid-spaced {
+  gap: $padding-sm;
+
+  @include media-md {
+    gap: $padding-md;
+  }
+
+  @include media-lg {
+    &.spaced-lg {
+      gap: $padding-lg;
+    }
+  }
+}
+// If you need the grid to have a gutter,
+// add 'gutter' as a class to the '.grid' container
+.grid-gutter {
+  padding-left: $padding-sm;
+  padding-right: $padding-sm;
+
+  @include media-md {
+    padding-left: $padding-md;
+    padding-right: $padding-md;
+  }
+}
+
+// Default Grid based $columns
+// Uses CSS grid: https://developer.mozilla.org/en-US/docs/Web/CSS/grid
+.grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat($columns, 1fr);
+
+  > * {
+    grid-column: span $columns;
+  }
+
+  // Auto layout
+  &.grid-auto {
+    grid-template-columns: repeat(auto-fit, minmax(min(var(--grid-min, 250px), 100%), 1fr));
+
+    > * {
+      grid-column: auto;
+    }
+  }
+}
+
+// Easy col classes for each breakpoint
+@mixin colClasses($breakpoint: '') {
+  @for $i from 1 through $columns / 2 {
+    @for $j from 1 through $columns / 2 {
+      @if $i < $j {
+        @if $i > 1 and $i / $j == 1 / 2 or $i > 1 and $i / $j == 1 / 3 or $i > 2 and $i / $j == 2 / 3 {
+        } @else {
+          .col#{$breakpoint}-#{$i}-#{$j} {
+            grid-column: span #{($columns / $j) * $i};
+          }
+        }
+      }
+    }
+  }
+}
+// Easey span classes for each breakpoint
+@mixin spanClasses($breakpoint: '') {
+  @for $i from 1 through $columns {
+    .span#{$breakpoint}-#{$i} {
+      grid-column: span #{$i};
+    }
+  }
+}
+
+// 'col' classes
+// The convention is 'col-' followed by a ratio,
+// which is written as (for example) '1-2' for '1/2'.
+// 1/3 = 'col-1-3', 2/3 = 'col-2-3', etc.
+@include colClasses();
+@include spanClasses();
+
+@include media-sm {
+  @include colClasses('-sm');
+  @include spanClasses('-sm');
+}
+
+@include media-md {
+  @include colClasses('-md');
+  @include spanClasses('-md');
+}
+
+@include media-lg {
+  @include colClasses('-lg');
+  @include spanClasses('-lg');
+}
+
+@include media-nav {
+  @include colClasses('-nav');
+  @include spanClasses('-nav');
+}
+
+@include media-xl {
+  @include colClasses('-xl');
+  @include spanClasses('-xl');
+}
+
+// Flex Layout (using flex)
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+
+  > * {
+    flex: auto;
+  }
+
+  &.flex-column {
+    flex-direction: column;
+  }
+  &.flex-reverse {
+    flex-direction: row-reverse;
+  }
+
+  @include media-md {
+    flex-wrap: nowrap;
+
+    &.flex-wrap {
+      flex-wrap: wrap;
+    }
+  }
+}
