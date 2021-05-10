@@ -8,9 +8,20 @@ html {
 }
 
 body {
-  font-size: 16px;
+  position: relative;
   color: color('black');
-	background: color('white');
+  box-sizing: border-box;
+  padding: $padding-lg 0;
+  background: color('white');
+  font: 16px/24px $font-sans, sans-serif;
+
+  @include media-nav {
+    padding-top: $header-md;
+  }
+}
+
+p {
+  @include p1;
 }
 
 a {
@@ -18,8 +29,12 @@ a {
 }
 
 // Thanks @zachleat: https://www.zachleat.com/web/fluid-images/
-img {
+img,
+video {
   max-width: 100%;
+  &:not(.no-radius) {
+    border-radius: 20px;
+  }
 }
 img[width] {
   width: auto;
@@ -38,8 +53,8 @@ img[src$=".svg"] {
   margin: 0 auto;
   position: relative;
   @include clearfix();
-  padding: 0 $padding-sm;
   max-width: $sitewrapper;
+  padding: 0 #{$padding-sm * 2};
   @include media-md {
     padding: 0 $padding-md;
   }
@@ -47,8 +62,8 @@ img[src$=".svg"] {
 
 // Skip To Main Content
 .skip-to-content {
-  top: 0;
   left: 0;
+  top: -32px;
   z-index: 1;
   padding: 12px;
   position: absolute;
@@ -83,6 +98,58 @@ img[src$=".svg"] {
     }
     @include media-xl {
       content: 'xl';
+    }
+  }
+}
+
+// Code
+code {
+  padding: 2px;
+  border-radius: 5px;
+  color: color('red');
+  display: inline-block;
+  font-family: monospace;
+  background-color: color('gray-light');
+}
+
+// Canvas
+.trip {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  opacity: 0.25;
+  position: fixed;
+}
+
+// Nate's Truckin'
+.walkin-frame {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  display: grid;
+  position: fixed;
+  pointer-events: none;
+  padding: 4px 0 4px 4px;
+  align-content: space-between;
+  justify-content: space-between;
+  grid-template-columns: auto auto;
+
+  div {
+    width: 32px;
+    height: 32px;
+    overflow: hidden;
+    image-rendering: pixelated;
+    background-size: 64px 32px;
+    background-position: 0 0;
+    &.truckin {
+      background-image: url('../images/truckin-sprite.png');
+    }
+    &.bookin {
+      background-image: url('../images/bookin-sprite.png');
     }
   }
 }

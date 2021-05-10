@@ -1,20 +1,12 @@
 from fabric.api import *
 import os
 
-env.hosts = ['staging.starthere.com']
-env.user = 'starthereuser'
-env.path = '~/Path/to/site'
-env.remotepath = '/path/to/site'
-env.git_branch = 'staging'
+env.hosts = ['stage.firebelly.co']
+env.user = 'firebelly'
+env.remotepath = '/home/firebelly/apps/fbw'
+env.git_branch = 'main'
 env.warn_only = True
-env.remote_protocol = 'http'
-
-def production():
-  env.hosts = ['starthere.com']
-  env.user = 'starthereuser'
-  env.remotepath = '/path/to/site'
-  env.git_branch = 'master'
-  env.remote_protocol = 'https'
+env.forward_agent = True
 
 def build():
   local('npx gulp --production')

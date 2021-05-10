@@ -1,5 +1,186 @@
 // Home page
 
-.home {
-  // styles
+.section {
+  margin-top: $padding-lg;
+
+  @include media-md {
+    margin-top: $padding-lg * 2;
+  }
+}
+
+.numbers {
+  > p {
+    text-align: center;
+  }
+
+  dl {
+    margin: $padding-lg 0;
+  }
+
+  .stat {
+    align-items: baseline;
+    + .stat {
+      margin-top: $padding-md;
+    }
+
+    dt {
+      @include h2-serif;
+      margin: 0;
+      text-align: right;
+    }
+    dd {
+      @include p1;
+      margin: 0;
+    }
+  }
+
+  .disclaimer {
+    @include p3;
+  }
+
+  @include media-md {
+    .stat {
+      + .stat {
+        margin-top: $padding-lg;
+      }
+    }
+  }
+}
+
+// Timeline
+.timeline {
+  padding: 0;
+
+  > .-inner {
+    position: relative;
+    padding: $padding-sm 0;
+    &::before {
+      left: 50%;
+      top: -32px;
+      width: 2px;
+      content: '';
+      bottom: 12px;
+      position: absolute;
+      pointer-events: none;
+      background-color: color('gray-light');
+    }
+
+    @include media-md {
+      padding: $padding-lg 0 #{$padding-lg * 2};
+    }
+  }
+
+  .timeline-bookin {
+    top: 50%;
+    z-index: 2;
+    width: 64px;
+    height: 64px;
+    margin: 0 auto;
+    position: sticky;
+    image-rendering: pixelated;
+    background-image: url('../images/bookin-sprite.png');
+    background-size: 128px 64px;
+    background-position: 0 0;
+
+    @include media-md {
+
+    }
+  }
+
+  .timeline-block {
+    display: flex;
+    gap: $padding-lg;
+    position: relative;
+    align-items: center;
+
+    > * {
+      flex-basis: 50%;
+    }
+
+    .timeline-text {
+      position: relative;
+      &::before {
+        top: 50%;
+        content: '';
+        height: 2px;
+        position: absolute;
+        width: $padding-md / 2;
+        right: -$padding-lg / 2;
+        background-color: color('gray-light');
+      }
+
+      > .-inner {
+        opacity: 0;
+        transform: translate3d(10%, 0, 0);
+        transition: opacity 0.35s ease-out, transform 0.5s ease-out;
+        &.-in-view {
+          opacity: 1;
+          transform: translate3d(0, 0, 0);
+        }
+      }
+
+      h3 {
+        @include h2-serif;
+      }
+    }
+
+    &:nth-of-type(even) {
+      flex-direction: row-reverse;
+      .timeline-text {
+        &::before {
+          right: auto;
+          left: -$padding-lg / 2;
+        }
+
+        > .-inner {
+          transform: translate3d(-10%, 0, 0);
+          &.-in-view {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+          }
+        }
+      }
+    }
+
+    .timeline-media {
+      text-align: center;
+
+      > * + * {
+        margin-top: $padding-md;
+      }
+
+      > * {
+        opacity: 0;
+        transition: opacity 0.5s ease-out;
+        &.-in-view {
+          opacity: 1;
+        }
+      }
+    }
+
+    + .timeline-block {
+      margin-top: $padding-lg;
+    }
+
+    @include media-md {
+      gap: $padding-lg * 2;
+
+      .timeline-text {
+        &::before {
+          width: $padding-md;
+          right: -$padding-lg;
+        }
+      }
+
+      &:nth-of-type(even) {
+        .timeline-text::before {
+          left: -$padding-lg;
+        }
+      }
+
+      + .timeline-block {
+        margin-top: $padding-lg * 2;
+      }
+    }
+  }
 }

@@ -2,26 +2,58 @@
 
 // Colors
 $colors: (
-  'white': #ffffff,
-  'black': #333333
+  'white': #fff,
+  'white-dark': #fafafa,
+  'offwhite': #f2f2f0,
+  'black': #232323,
+  'gray': #707070,
+  'gray-dark': #b5b5b5,
+  'gray-light': #e5e5e3,
+  'red': #ff3d00
 );
-
 @function color($color-name) {
   @return map-get($colors, $color-name);
 }
 
+// Z-index maps
+$z-layers: (
+  header: 70,
+  nav: 100,
+  blobs: 150,
+  overlay: 200,
+  modal: 400,
+  cursor: 1000
+);
+@function z($key) {
+  @return map-get($z-layers, $key);
+}
+
+// Sitewrapper
+$sitewrapper: 1200px;
+
+// Header Height
+$header-sm: 64px;
+$header-md: 96px;
+
+// Vertical Beat
+$beat: 16px;
+
+// Padding increment
+$padding-sm: 17px;
+$padding-md: 35px;
+$padding-lg: 72px;
+
 // Breakpoints
-$breakpoint-sm: 520px;
+$breakpoint-sm: 600px;
 $breakpoint-md: 768px;
-$breakpoint-lg: 1000px;
-$breakpoint-nav: 1100px;
-$breakpoint-xl: 1200px;
+$breakpoint-nav: 1024px;
+$breakpoint-lg: 1200px;
+$breakpoint-xl: 1400px;
 
-// Site Wrapper
-$sitewrapper: 1400px;
+// Custom cubic easings
+$cubic-ease1: cubic-bezier(0.77, 0, 0.175, 1);
+$cubic-ease2: cubic-bezier(0.165, 0.84, 0.44, 1);
 
-// Padding/spacing
-$beat: 10px;
-$padding-sm: $beat * 2;
-$padding-md: $padding-sm * 2;
-$padding-lg: $padding-md * 2;
+// Base transition styles using @include transition(property)
+$transition-duration: 0.25s;
+$transition-easing: ease-out;

@@ -1,5 +1,29 @@
 // Footer
 
 .site-footer {
-  
+  text-align: center;
+  padding: $padding-lg 0;
+  @include media-md {
+    padding: #{$padding-lg * 2} 0;
+  }
+
+  .-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: $padding-lg;
+  }
+
+  .heartBeat {
+    @include h2-serif;
+  }
+
+  .footer-truckin {
+    width: 128px;
+    height: 128px;
+    display: inline-block;
+    image-rendering: pixelated;
+    background-image: url('../images/favicon.gif');
+    background-size: cover;
+  }
 }
