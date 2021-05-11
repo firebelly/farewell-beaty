@@ -50,10 +50,11 @@
 // Timeline
 .timeline {
   padding: 0;
+  list-style: none;
 
   > .-inner {
     position: relative;
-    padding: $padding-sm 0;
+    padding: $padding-md 0 #{$padding-lg * 2};
     &::before {
       left: 50%;
       top: -32px;
@@ -71,38 +72,40 @@
   }
 
   .timeline-bookin {
-    top: 50%;
     z-index: 2;
     width: 64px;
     height: 64px;
     margin: 0 auto;
     position: sticky;
+    top: calc(100% - 128px);
     image-rendering: pixelated;
     background-image: url('../images/bookin-sprite.png');
     background-size: 128px 64px;
     background-position: 0 0;
 
     @include media-md {
-
+      top: 50%;
     }
   }
 
   .timeline-block {
-    display: flex;
-    gap: $padding-lg;
+    padding: 12px;
     position: relative;
-    align-items: center;
+    background-color: color('white');
 
     > * {
       flex-basis: 50%;
     }
 
     .timeline-text {
+      text-align: center;
       position: relative;
+      margin-bottom: $padding-md;
       &::before {
         top: 50%;
         content: '';
         height: 2px;
+        display: none;;
         position: absolute;
         width: $padding-md / 2;
         right: -$padding-lg / 2;
@@ -168,14 +171,18 @@
     }
 
     + .timeline-block {
-      margin-top: $padding-lg;
+      margin-top: $padding-lg * 2;
     }
 
     @include media-md {
+      display: flex;
+      align-items: center;
       gap: $padding-lg * 2;
+      background-color: transparent;
 
       .timeline-text {
         &::before {
+          display: block;
           width: $padding-md;
           right: -$padding-lg;
         }
