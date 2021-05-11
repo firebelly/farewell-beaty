@@ -1,5 +1,6 @@
 // Common js
 import { CountUp } from 'countup.js';
+import mediumZoom from 'medium-zoom';
 import appState from '../util/appState';
 
 // Shared vars
@@ -18,6 +19,10 @@ export default {
     const countUpOptions = {
       duration: 1
     }
+
+    mediumZoom('[data-zoomable]', {
+      margin: 64
+    });
 
     // Init Functions
     _initInView();

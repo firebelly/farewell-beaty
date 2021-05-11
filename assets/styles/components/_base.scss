@@ -50,6 +50,11 @@ img[src$=".svg"] {
   max-width: none;
 }
 
+// Medium Zoom
+.medium-zoom-image--opened {
+  z-index: 2;
+}
+
 .sitewrapper {
   width: 100%;
   margin: 0 auto;
