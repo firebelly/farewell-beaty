@@ -100,7 +100,6 @@ export default {
         canvas = document.getElementById('trip'),
         ctx = canvas.getContext('2d'),
         things = [],
-        colors = ['#f0f', '#faf', '#fff'],
         textures = [new Image(), new Image(), new Image(), new Image(), new Image(), new Image()];
 
       textures[0].src = 'https://emoji.slack-edge.com/T0J69PRC2/carl/9313727e4eab776e.png';
@@ -124,7 +123,6 @@ export default {
           this.velocityX = Math.random() * 3;
           this.velocityY = Math.random() * 3;
           this.velocityZ = (Math.random() - .5) / 200;
-          this.color = colors[Math.floor(Math.random() * 3)];
           this.texture = textures[Math.floor(Math.random() * textures.length)];
           this.width = 128;
           this.height = 128;
@@ -135,8 +133,8 @@ export default {
           this.y += this.velocityY * this.directionY;
           this.z += this.velocityZ * this.directionZ;
 
-          if (this.x < 0 || this.x > width - this.width) { this.directionX *= -1; }
-          if (this.y < 0 || this.y > height - this.height) { this.directionY *= -1; }
+          if (this.x < 0 || this.x > window.innerWidth - this.width) { this.directionX *= -1; }
+          if (this.y < 0 || this.y > window.innerHeight - this.height) { this.directionY *= -1; }
           if (this.z < 0 || this.z > 1) { this.directionZ *= -1; }
 
           ctx.fillStyle = this.color;
@@ -164,17 +162,28 @@ export default {
         myReq = requestAnimationFrame(render);
       }
 
+      // Trigger the trip!
       let tripTrigger = document.getElementById('trippin');
       tripTrigger.addEventListener('click', function(e) {
         if (canvas.classList.contains('-active')) {
           canvas.classList.remove('-active');
+          tripTrigger.classList.remove('-active');
           ctx.clearRect(0, 0, canvas.width, canvas.height);
           cancelAnimationFrame(myReq);
         } else {
+          tripTrigger.classList.add('-active');
           canvas.classList.add('-active');
           render();
         }
       });
+
+      // Resize canvas on resize
+      function windowResize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      };
+
+      window.addEventListener('resize', windowResize);
     }
 
     // Disabling transitions on certain elements on resize

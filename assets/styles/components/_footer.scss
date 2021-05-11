@@ -23,6 +23,12 @@
     @include h2-serif;
   }
 
+  .trippin-container {
+    min-width: 128px;
+    min-height: 128px;
+    display: inline-block;
+  }
+
   .footer-truckin {
     z-index: 10;
     width: 128px;
@@ -34,6 +40,7 @@
     background-image: url('../images/favicon.gif');
     background-size: cover;
 
+    &.-active,
     &:hover,
     &:focus {
       mask-image: url('../images/favicon.gif');
@@ -41,6 +48,17 @@
       mask-size: 128px 128px;
       background-image: url('../images/rainbow.gif'), url('../images/favicon.gif');
       background-blend-mode: hard-light;
+    }
+
+    &.-active {
+      left: 50%;
+      bottom: 144px;
+      position: fixed;
+      transform: translateX(-50%);
+
+      @include media-md {
+        bottom: 216px;
+      }
     }
   }
 }
