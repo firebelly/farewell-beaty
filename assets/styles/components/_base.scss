@@ -39,8 +39,10 @@ video {
 img[width] {
   width: auto;
 }
-img[width][height] {
+img[width][height],
+video[width][height] {
   height: auto;
+  aspect-ratio: attr(width) / attr(height);
 }
 img[src$=".svg"] {
   width: 100%;
