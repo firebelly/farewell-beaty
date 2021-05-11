@@ -10,10 +10,11 @@ env.forward_agent = True
 
 def deploy():
   update()
-  local('rm -rf dist')
-  local('yarn build:production')
-  run('mkdir -p ' + env.remotepath + '/dist')
-  put('dist', env.remotepath + '/')
+  if assets != 'n':
+    local('rm -rf dist')
+    local('yarn build:production')
+    run('mkdir -p ' + env.remotepath + '/dist')
+    put('dist', env.remotepath + '/')
 
 def update():
   with cd(env.remotepath):
