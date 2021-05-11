@@ -8,7 +8,7 @@ env.git_branch = 'main'
 env.warn_only = True
 env.forward_agent = True
 
-def deploy():
+def deploy(assets='y'):
   update()
   if assets != 'n':
     local('rm -rf dist')
