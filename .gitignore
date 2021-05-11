@@ -7,3 +7,4 @@ fabfile.pyc
 dist
 yarn-error.log
 assets/images/timeline
+assets/fonts
