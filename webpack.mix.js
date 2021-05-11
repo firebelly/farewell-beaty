@@ -14,7 +14,6 @@ mix.browserSync('fwb.static');
 
 // Styles
 mix.sass(src`styles/main.scss`, 'styles');
-mix.sass(src`styles/fonts.scss`, 'styles');
 
 // JavaScript
 mix.js(src`scripts/main.js`, 'scripts')

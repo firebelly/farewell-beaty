@@ -24,11 +24,23 @@
   }
 
   .footer-truckin {
+    z-index: 10;
     width: 128px;
     height: 128px;
+    cursor: pointer;
+    position: relative;
     display: inline-block;
     image-rendering: pixelated;
     background-image: url('../images/favicon.gif');
     background-size: cover;
+
+    &:hover,
+    &:focus {
+      mask-image: url('../images/favicon.gif');
+      mask-repea: no-repeat;
+      mask-size: 128px 128px;
+      background-image: url('../images/rainbow.gif'), url('../images/favicon.gif');
+      background-blend-mode: hard-light;
+    }
   }
 }

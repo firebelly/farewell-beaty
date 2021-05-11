@@ -101,12 +101,14 @@ export default {
         ctx = canvas.getContext('2d'),
         things = [],
         colors = ['#f0f', '#faf', '#fff'],
-        textures = [new Image(), new Image(), new Image()];
+        textures = [new Image(), new Image(), new Image(), new Image(), new Image(), new Image()];
 
       textures[0].src = 'https://emoji.slack-edge.com/T0J69PRC2/carl/9313727e4eab776e.png';
       textures[1].src = 'https://emoji.slack-edge.com/T0J69PRC2/beaty/f21362ee45ca59e9.png';
-      textures[2].src = 'https://emoji.slack-edge.com/T0J69PRC2/mattmama/dbe92f0df2411399.png';
-
+      textures[2].src = 'https://emoji.slack-edge.com/T0J69PRC2/hairlessnate/6fbee8545e3874d8.png';
+      textures[3].src = 'https://emoji.slack-edge.com/T0J69PRC2/happy-nate/8c6e36a7dbfdffa6.png';
+      textures[4].src = 'https://emoji.slack-edge.com/T0J69PRC2/nate-bookin/edfdd7a94964e079.gif';
+      textures[5].src = 'https://emoji.slack-edge.com/T0J69PRC2/nate-truckin/c10f0f9ddb3021a7.gif';
 
       canvas.width = width;
       canvas.height = height;
@@ -123,7 +125,7 @@ export default {
           this.velocityY = Math.random() * 3;
           this.velocityZ = (Math.random() - .5) / 200;
           this.color = colors[Math.floor(Math.random() * 3)];
-          this.texture = textures[Math.floor(Math.random() * 3)];
+          this.texture = textures[Math.floor(Math.random() * textures.length)];
           this.width = 128;
           this.height = 128;
         }
@@ -147,10 +149,11 @@ export default {
         }
       }
 
-      for (var i = 0; i < 10; i++) {
+      for (var i = 0; i < 30; i++) {
         things.push(new Thing());
       }
 
+      let myReq;
       var render = () => {
         // ctx.clearRect(0, 0, width, height);
 
@@ -158,11 +161,19 @@ export default {
           things[i].render();
         }
 
-        requestAnimationFrame(render);
+        myReq = requestAnimationFrame(render);
       }
 
-      textures[0].addEventListener('load', () => {
-        // render();
+      let tripTrigger = document.getElementById('trippin');
+      tripTrigger.addEventListener('click', function(e) {
+        if (canvas.classList.contains('-active')) {
+          canvas.classList.remove('-active');
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          cancelAnimationFrame(myReq);
+        } else {
+          canvas.classList.add('-active');
+          render();
+        }
       });
     }
 
