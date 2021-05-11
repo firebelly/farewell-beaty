@@ -122,6 +122,15 @@
       h3 {
         @include h2-serif;
       }
+
+      p {
+        a {
+          &:hover,
+          &:focus {
+            color: color('red');
+          }
+        }
+      }
     }
 
     &:nth-of-type(even) {
