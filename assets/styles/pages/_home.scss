@@ -124,6 +124,7 @@
 
       h3 {
         @include h2-serif;
+        margin-bottom: 0.2em;
       }
 
       p {
@@ -181,6 +182,7 @@
       background-color: transparent;
 
       .timeline-text {
+        text-align: left;
         &::before {
           display: block;
           width: $padding-md;
