@@ -1,18 +1,17 @@
 from fabric.api import *
 import os
 
-env.hosts = ['stage.firebelly.co']
+env.hosts = ['nate-is-loved-by.firebelly.co']
 env.user = 'firebelly'
-env.remotepath = '/home/firebelly/apps/fbw'
+env.remotepath = '/home/firebelly/apps/fwb'
 env.git_branch = 'main'
 env.warn_only = True
 env.forward_agent = True
 
-def build():
-  local('npx gulp --production')
-
 def deploy():
   update()
+  local('rm -rf dist')
+  local('yarn build:production')
   run('mkdir -p ' + env.remotepath + '/dist/assets/images/timeline')
   put('dist/assets/images/timeline', env.remotepath + '/dist/assets/images/timeline/')
 
