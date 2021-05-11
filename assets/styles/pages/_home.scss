@@ -184,3 +184,9 @@
     }
   }
 }
+
+#jeb {
+  @include media-md {
+    max-width: 250px;
+  }
+}
